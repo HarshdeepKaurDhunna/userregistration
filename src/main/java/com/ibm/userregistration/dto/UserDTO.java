@@ -3,6 +3,8 @@
  */
 package com.ibm.userregistration.dto;
 
+import com.ibm.userregistration.validators.PasswordValidator;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 
@@ -16,7 +18,7 @@ public class UserDTO {
 	
 	@Schema(description = "Password for registration")
 	@NotEmpty(message = "The password is required.")
-	@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[_#$%]).{8,}$", message = "Password must be 8 characters long and combination of uppercase letters, lowercase letters, numbers, contains special characters_#$%.")
+	@PasswordValidator
 	private String password;
 	
 	@Schema(description = "IP Address for registartion")

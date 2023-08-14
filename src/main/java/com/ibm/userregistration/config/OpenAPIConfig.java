@@ -5,14 +5,16 @@ package com.ibm.userregistration.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 
 /**
- * 
+ * Open Api Configuration class
  */
 @Configuration
+@PropertySource("application.properties")
 public class OpenAPIConfig {
 	
 	  @Bean
