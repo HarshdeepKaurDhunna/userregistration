@@ -65,7 +65,7 @@ public class UserService {
 	}
 
 	private String getWelcomeText(UserDTO userDTO, GeolocationDetail geolocationDetail) {
-		return "Hey " + userDTO.getUserName() + "from" + geolocationDetail.getCity()
+		return "Hey " + userDTO.getUserName() + " from " + geolocationDetail.getCity()
 				+ "! Welcome, you have registered succesfully";
 	}
 

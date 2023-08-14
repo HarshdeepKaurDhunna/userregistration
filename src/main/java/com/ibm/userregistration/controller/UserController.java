@@ -4,6 +4,8 @@
 package com.ibm.userregistration.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,9 +24,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
-
-
-
 /**
  * 
  */
@@ -33,18 +32,24 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api")
 public class UserController {
-	
-	 @Autowired
-	 UserService userService;
-	 
-	 @Operation(summary = "Validate User", tags = { "UserRegistartion", "post" })
-	  @ApiResponses({
-	      @ApiResponse(responseCode = "200", content = {
-	          @Content(schema = @Schema(implementation = UserDTO.class), mediaType = "application/json") }),
-	      @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
-	  @PostMapping("/userRegistration")
-	  public void validateUser(@Valid @RequestBody UserDTO userDTO) {
-		 UserResponseDTO UserResponseDTO = userService.getUserDetails(userDTO);
-	  }
+
+	@Autowired
+	UserService userService;
+
+	@Operation(summary = "Validate User", tags = { "UserRegistartion", "post" })
+	@ApiResponses({ @ApiResponse(responseCode = "200", content = {
+			@Content(schema = @Schema(implementation = UserResponseDTO.class), mediaType = "application/json") }),
+			@ApiResponse(responseCode = "400", content = { @Content(schema = @Schema()) }), })
+	@PostMapping("/userRegistration")
+	public ResponseEntity<UserResponseDTO> validateUser(@Valid @RequestBody UserDTO userDTO) {
+		
+		UserResponseDTO userResponseDTO = userService.getUserDetails(userDTO);
+
+		if (userResponseDTO != null) {
+			return new ResponseEntity<>(userResponseDTO, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
 
 }

@@ -24,6 +24,14 @@ public class UserDTO {
 	@Schema(description = "IP Address for registartion")
 	@NotEmpty(message = "The ipAddress is required.")
 	private String ipAddress;
+	
+	public UserDTO(@NotEmpty(message = "The username is required.") String userName,
+			@NotEmpty(message = "The password is required.") String password,
+			@NotEmpty(message = "The ipAddress is required.") String ipAddress) {
+		this.userName = userName;
+		this.password = password;
+		this.ipAddress = ipAddress;
+	}
 
 	/**
 	 * @return the userName
@@ -31,6 +39,7 @@ public class UserDTO {
 	public String getUserName() {
 		return userName;
 	}
+
 
 	/**
 	 * @param userName the userName to set

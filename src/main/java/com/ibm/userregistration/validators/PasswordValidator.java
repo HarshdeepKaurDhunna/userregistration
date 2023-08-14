@@ -1,6 +1,5 @@
 package com.ibm.userregistration.validators;
 
-
 import java.lang.annotation.*;
 
 import jakarta.validation.Constraint;
@@ -11,9 +10,9 @@ import jakarta.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface PasswordValidator {
-  String message() default "Must be 8 characters long and combination of uppercase letters, lowercase letters, numbers, special characters.";
+	String message() default "Must be 8 characters long and combination of uppercase letters, lowercase letters, numbers, special characters contains special characters _#$% ";
 
-  Class<?>[] groups() default {};
+	Class<?>[] groups() default {};
 
-  Class<? extends Payload>[] payload() default {};
+	Class<? extends Payload>[] payload() default {};
 }
